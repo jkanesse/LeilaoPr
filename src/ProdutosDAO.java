@@ -13,6 +13,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.SQLException;
 
 
 public class ProdutosDAO {
@@ -23,20 +24,29 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public void cadastrarProduto (ProdutosDTO produto){
-        
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
+        conectaDAO dao = new conectaDAO();
+        try {
+            conn = dao.connectDB();
+            String sql = "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, produto.getNome());
+            statement.setInt(2, produto.getValor());
+            statement.setString(3, produto.getStatus());
+            int linhasAfetadas = statement.executeUpdate();
+            System.out.println("Linhas afetadas: " + linhasAfetadas);
+            JOptionPane.showMessageDialog(null,"Dados cadastrados com sucesso.");
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Erro de cadastro: "+e);  
+        } finally {
+            dao.desconectar();
+        }
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
         
         return listagem;
     }
-    
-    
-    
         
 }
 
