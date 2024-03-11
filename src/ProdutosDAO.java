@@ -36,12 +36,11 @@ public class ProdutosDAO {
             int linhasAfetadas = statement.executeUpdate();
             System.out.println("Linhas afetadas: " + linhasAfetadas);
             JOptionPane.showMessageDialog(null,"Dados cadastrados com sucesso.");
+            dao.getConn().close();
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Erro de cadastro: "+e);  
-        } finally {
-            dao.desconectar();
-        }
+        } 
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
@@ -60,15 +59,54 @@ public class ProdutosDAO {
                 
                 listagem.add(v);
             }
-            
+            dao.getConn().close();
             return listagem;
             
         } catch (SQLException ex) {
             return null;
-        } finally {
-            dao.desconectar();
         }
     }
+    
+    public void venderProduto (int id){
+        conectaDAO dao = new conectaDAO();
+        try {
+            conn = dao.connectDB();
+            String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            int linhasAfetadas = statement.executeUpdate();
+            System.out.println("Linhas afetadas: " + linhasAfetadas);
+            JOptionPane.showMessageDialog(null,"Dados atualizados com sucesso.");
+            dao.getConn().close();
+        } catch (SQLException e) {
+            System.out.println("Erro de atualização: "+e);  
+        }
+    }
+    
+//    public ArrayList<ProdutosDTO> listarProdutosVendidos (){
+//        conectaDAO dao = new conectaDAO();
+//        try {
+//            conn = dao.connectDB();
+//            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+//            resultset = prep.executeQuery();
+//            
+//            while(resultset.next()){ 
+//                ProdutosDTO v = new ProdutosDTO();
+//                v.setId(resultset.getInt("Id"));
+//                v.setNome(resultset.getString("Nome"));
+//                v.setValor(resultset.getInt("Valor"));
+//                v.setStatus(resultset.getString("Status"));
+//                
+//                listagem.add(v);
+//            }
+//            
+//            dao.getConn().close();
+//            return listagem;
+//            
+//        } catch (SQLException ex) {
+//            return null;
+//        }
+//    }
         
 }
 
