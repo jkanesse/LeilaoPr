@@ -15,27 +15,19 @@ import javax.swing.JOptionPane;
  *
  * @author Adm
  */
+
 public class conectaDAO {
-    Connection conn;
+    private Connection conn;
     
-    public Connection connectDB(){
-        
-        try {
-        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sqldb", "root", "1729Lz093");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
-        }
+    public Connection connectDB() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sqldb", "root", "1729Lz093");
+        return conn;
+    }
+
+    public Connection getConn() {
         return conn;
     }
     
-    public void desconectar(){
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            //
-        }
-    }
     
 }
+
