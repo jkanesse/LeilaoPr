@@ -83,30 +83,30 @@ public class ProdutosDAO {
         }
     }
     
-//    public ArrayList<ProdutosDTO> listarProdutosVendidos (){
-//        conectaDAO dao = new conectaDAO();
-//        try {
-//            conn = dao.connectDB();
-//            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
-//            resultset = prep.executeQuery();
-//            
-//            while(resultset.next()){ 
-//                ProdutosDTO v = new ProdutosDTO();
-//                v.setId(resultset.getInt("Id"));
-//                v.setNome(resultset.getString("Nome"));
-//                v.setValor(resultset.getInt("Valor"));
-//                v.setStatus(resultset.getString("Status"));
-//                
-//                listagem.add(v);
-//            }
-//            
-//            dao.getConn().close();
-//            return listagem;
-//            
-//        } catch (SQLException ex) {
-//            return null;
-//        }
-//    }
+    public ArrayList<ProdutosDTO> listarProdutosVendidos (){
+        conectaDAO dao = new conectaDAO();
+        try {
+            conn = dao.connectDB();
+            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+            resultset = prep.executeQuery();
+            
+            while(resultset.next()){ 
+                ProdutosDTO v = new ProdutosDTO();
+                v.setId(resultset.getInt("Id"));
+                v.setNome(resultset.getString("Nome"));
+                v.setValor(resultset.getInt("Valor"));
+                v.setStatus(resultset.getString("Status"));
+                
+                listagem.add(v);
+            }
+            
+            dao.getConn().close();
+            return listagem;
+            
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
         
 }
 
