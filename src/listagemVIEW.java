@@ -145,9 +145,9 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-//        vendasVIEW vendas = new vendasVIEW(); 
-//        vendas.setVisible(true);
-//        this.dispose();
+        vendasVIEW vendas = new vendasVIEW(); 
+        vendas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -203,24 +203,24 @@ public class listagemVIEW extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void listarProdutos(){
-//        try {
-//            ProdutosDAO produtosdao = new ProdutosDAO();
-//            
-//            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-//            model.setNumRows(0);
-//            
-//            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-//            
-//            for(int i = 0; i < listagem.size(); i++){
-//                model.addRow(new Object[]{
-//                    listagem.get(i).getId(),
-//                    listagem.get(i).getNome(),
-//                    listagem.get(i).getValor(),
-//                    listagem.get(i).getStatus()
-//                });
-//            }
-//        } catch (Exception e) {
-//        }
+        try {
+            ProdutosDAO produtosdao = new ProdutosDAO();
+            
+            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
+            model.setNumRows(0);
+            
+            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            
+            for(int i = 0; i < listagem.size(); i++){
+                model.addRow(new Object[]{
+                    listagem.get(i).getId(),
+                    listagem.get(i).getNome(),
+                    listagem.get(i).getValor(),
+                    listagem.get(i).getStatus()
+                });
+            }
+        } catch (Exception e) {
+        }
     
     }
 }
